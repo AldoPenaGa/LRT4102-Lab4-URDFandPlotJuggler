@@ -74,17 +74,45 @@ This Python code works similarly to the one developed in the last practice https
 ```
 This will help in the plotting for PlotJuggler analysis.
 
+**Other helpful codes and commands**
+
+Here are presented the commands and codes that can be considered helpful to the depletion of the code:
+
+- Run ROS: roscore
+For the correct execution verify that ~/.bashrc has IP addresses that correspond to the master URI and local to be the same as the computer.
+
+- Run the turtlesim node: `rosrun turtlesim turtlesim_node`
+- Reset the environment: `rosservice call reset`
+- 
+
 ### Results
 
-The first image (figure 1) shows the built URDF model displayed in the following page https://mymodelrobot.appspot.com/5629499534213120 , the joints `joint_x`, `joint_y`, `joint_z` permits the moving of the model. 
+The first image (figure 1) `URDF.png` shows the built URDF model displayed in the following page https://mymodelrobot.appspot.com/5629499534213120 , the joints `joint_x`, `joint_y`, `joint_z` permits the moving of the model. 
 
-![Figure 1. URDF model loaded in mymodelrobot](https://github.com/AldoPenaGa/LRT4102-Lab4-URDFandPlotJuggler/.jpg)
-
-
-Meanwhile, the next series of pictures (figures illustrate the results for the PlotJuggler and ROSbag section.
+![Figure 1. URDF model loaded in mymodelrobot](https://github.com/AldoPenaGa/LRT4102-Lab4-URDFandPlotJuggler/blob/main/Pictures/URDF.png)
 
 
+Meanwhile, the next series of pictures (figures illustrate the results for the PlotJuggler and ROSbag section. The figure 2 `PlotATGDTG` shows the correct plotting of the topics `/error_linear`, `/error_angular`, `/distance_to_go` and `/angle_to_go`.
 
+![Figure 2. Test of the publishers and the recent created topics in PlotJuggler](https://github.com/AldoPenaGa/LRT4102-Lab4-URDFandPlotJuggler/blob/main/Pictures/PlotATGDTG.png)
+
+`TestPub1`, `TestPub2` and `TestPub3` illustrate how the publisher is working on the intended topics. 
+
+![Figure 3. First test of the integration with the code in PlotJuggler](https://github.com/AldoPenaGa/LRT4102-Lab4-URDFandPlotJuggler/blob/main/Pictures/TestPub1.png)
+
+![Figure 4. Second test of the integration with the code in PlotJuggler](https://github.com/AldoPenaGa/LRT4102-Lab4-URDFandPlotJuggler/blob/main/Pictures/TestPub2.png)
+
+![Figure 5. Second test of the integration with the code in PlotJuggler](https://github.com/AldoPenaGa/LRT4102-Lab4-URDFandPlotJuggler/blob/main/Pictures/TestPub3.png)
+
+Finally, `ROSbagRecord` and `RosbagReplay` show the results whilst using ROSbag as a tool for replicating the information published among the topics. The following commands were run in order to successfully use ROSbag: 
+
+- For recording: rosbag record -O NameOfTheRecording.bag  /error_linear /error_angular /angle_to_go /distance_to_go
+- For replaying: rosbag play NameOfTheRecording.bag
+
+**It is important to run these commands in the directory expected to allocate the recordings.**
+
+![Figure 6. ROSbag record made while doing an arbitrary routine](https://github.com/AldoPenaGa/LRT4102-Lab4-URDFandPlotJuggler/blob/main/Pictures/ROSbagRecord.png)
+![Figure 7. ROSbag replay showing the replication of the routine](https://github.com/AldoPenaGa/LRT4102-Lab4-URDFandPlotJuggler/blob/main/Pictures/ROSbagReplay.png)
 
 ### Conclusion
 In this study, we tested the Euclidean strategy for handling the Turtlesim in the Robot Operating System (ROS). We accomplished precise movement by calculating distances and angles while employing a P controller. Throughout this educational journey, we connected theory and practice, gaining significant insights into robotic system design. Plus, new structures like services were explored, setting another tool for basic programs in ROS.
