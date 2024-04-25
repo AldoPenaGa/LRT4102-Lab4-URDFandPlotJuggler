@@ -115,7 +115,7 @@ Finally, `ROSbagRecord` and `RosbagReplay` show the results whilst using ROSbag 
 ![Figure 7. ROSbag replay showing the replication of the routine](https://github.com/AldoPenaGa/LRT4102-Lab4-URDFandPlotJuggler/blob/main/Pictures/ROSbagReplay.png)
 
 ### Conclusion
-In this study, we tested the Euclidean strategy for handling the Turtlesim in the Robot Operating System (ROS). We accomplished precise movement by calculating distances and angles while employing a P controller. Throughout this educational journey, we connected theory and practice, gaining significant insights into robotic system design. Plus, new structures like services were explored, setting another tool for basic programs in ROS.
+This report meets the objective of developing a graphically represented Cartesian robot using URDF and examining ROS functionality with Plot Juggler. The goals were reached while creating a URDF model to create a graphical representation of the robot and using Plot Juggler to analyze ROS performance by demonstrating relevant parameters evolution. We showed the utility of using ROSbag in a robotic system. One last comment to make which we were previously aware of but would be ideal to highlight is the tendency that ROSbag has to make slight changes every time a ROSbag replay is run, we highly recommend not using ROSbag as a reliable tool for replication but a tool for analysis. 
 
 ### Contributors
 
