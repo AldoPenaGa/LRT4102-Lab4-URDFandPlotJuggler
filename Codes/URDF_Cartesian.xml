@@ -1,0 +1,219 @@
+<?xml version="1.0"?>
+<robot name="Robot_cartesiano">
+
+  <!-- Material definitions bases -->
+  <material name="mat1">
+    <color rgba="0.8 0.8 0 1.0"/>
+  </material>
+
+   <!-- Material definitions cilindros -->
+  <material name="mat2">
+    <color rgba="0.5 0.5 0.5 1"/>
+  </material>
+
+  <!-- Base link -->
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.2 0.2 0.1"/>
+      </geometry>
+      <material name="mat1"/>
+    </visual>
+  </link>
+
+  <!-- Link X -->
+  <link name="link_x">
+    <visual>
+      <geometry>
+        <cylinder radius="0.03" length="0.5"/>
+      </geometry>
+      <material name="mat2"/>
+    </visual>
+  </link>
+
+  <!-- Joint for X movement -->
+  <joint name="joint_x" type="prismatic">
+    <origin xyz="0 0 0.30" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="link_x"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="0" upper="1" effort="1000" velocity="0.5"/>
+  </joint>
+
+<!--Aqui empieza cilindro en x que se queda fijo-->
+<!-- Link X1 -->
+  <link name="link_x1">
+    <visual>
+      <geometry>
+        <cylinder radius="0.03" length="0.5"/>
+      </geometry>
+      <material name="mat2"/>
+    </visual>
+  </link>
+
+  <!-- Joint for X1 movement -->
+  <joint name="joint_x1" type="prismatic">
+    <origin xyz="0 0 0.30" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="link_x1"/>
+    <axis xyz="0 0 0"/>
+    <limit lower="0" upper="1" effort="1000" velocity="0.5"/>
+  </joint>
+
+<!-- Caja X que se mueve en los ejesx -->
+   <link name="base_caja11">
+    <visual>
+      <geometry>
+        <box size="1 0.2 0.1"/>
+      </geometry>
+      <material name="mat1"/>
+    </visual>
+  </link>
+
+  <!-- Joint for caja movement -->
+  <joint name="joint_caja11" type="prismatic">
+    <origin xyz="-0.47 0 0" rpy="0 0 0"/>
+    <parent link="link_x"/>
+    <child link="base_caja11"/>
+    <axis xyz="0 0 0"/>
+    <limit lower="0" upper="1" effort="1000" velocity="0.5"/>
+  </joint>
+
+  <!-- Caja X-Y -->
+   <link name="base_caja">
+    <visual>
+      <geometry>
+        <box size="1 0.2 0.1"/>
+      </geometry>
+      <material name="mat1"/>
+    </visual>
+  </link>
+
+  <!-- Joint for caja movement -->
+  <joint name="joint_caja" type="prismatic">
+    <origin xyz="0.47 0 0" rpy="0 0 0"/>
+    <parent link="link_x"/>
+    <child link="base_caja"/>
+    <axis xyz="0 0 0"/>
+    <limit lower="0" upper="1" effort="1000" velocity="0.5"/>
+  </joint>
+
+  <!-- Caja y-z -->
+   <link name="base_caja2">
+    <visual>
+      <geometry>
+        <box size="0.2 1 0.1"/>
+      </geometry>
+      <material name="mat1"/>
+    </visual>
+  </link>
+
+  <!-- Joint for caja movement -->
+  <joint name="joint_caja2" type="prismatic">
+    <origin xyz="0 0.5 0" rpy="0 0 0"/>
+    <parent link="link_y"/>
+    <child link="base_caja2"/>
+    <axis xyz="0 0 0"/>
+    <limit lower="0" upper="1" effort="1000" velocity="0.5"/>
+  </joint>
+ 
+<!-- Caja3 que va de y a y y se vea que se mueve-->
+  <!-- Caja y-z -->
+  <!-- Caja y-z -->
+   <link name="base_caja3">
+    <visual>
+      <geometry>
+        <box size="0.2 1 0.1"/>
+      </geometry>
+      <material name="mat1"/>
+    </visual>
+  </link>
+
+  <!-- Joint for caja movement -->
+ <!-- Mover a qui para las posiciones de las cajas  -->
+  <joint name="joint_caja3" type="prismatic">
+    <origin xyz="0 -0.5 0" rpy="0 0 0"/>
+    <parent link="link_y"/>
+    <child link="base_caja3"/>
+    <axis xyz="0 0 0"/>
+    <limit lower="0" upper="1" effort="1000" velocity="0.5"/>
+  </joint>
+
+  <!-- Link Y -->
+  <link name="link_y">
+    <visual>
+      <geometry>
+        <cylinder radius="0.03" length="0.5"/>
+      </geometry>
+      <material name="mat2"/>
+    </visual>
+  </link>
+
+  <!-- Joint for Y movement -->
+  <joint name="joint_y" type="prismatic">
+    <origin xyz="1 0 0" rpy="0 0 0"/>
+    <parent link="link_x"/>
+    <child link="link_y"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="0" upper="1" effort="1000" velocity="0.5"/>
+  </joint>
+
+  <!-- Link Z -->
+  <link name="link_z">
+    <visual>
+      <geometry>
+        <cylinder radius="0.03" length="0.5"/>
+      </geometry>
+      <material name="mat2"/>
+    </visual>
+  </link>
+
+ <!-- Joint for Z aqui se mueve en negativo imprimeindo movement -->
+  <!-- Joint for Z movement -->
+  <joint name="joint_z" type="prismatic">
+    <origin xyz="0 1 0" rpy="0 0 0"/>
+    <parent link="link_y"/>
+    <child link="link_z"/>
+    <axis xyz="0 0 -1"/>
+    <limit lower="0" upper="1" effort="1000" velocity="0.5"/>
+  </joint>
+
+  <!-- Caja X-Y -->
+   <link name="base_caja4">
+    <visual>
+      <geometry>
+        <box size="0.2 0.03 1"/>
+      </geometry>
+      <material name="mat1"/>
+    </visual>
+  </link>
+
+  <!-- Joint for caja movement -->
+  <joint name="joint_caja4" type="prismatic">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="link_z"/>
+    <child link="base_caja4"/>
+    <axis xyz="0 0 0"/>
+    <limit lower="0" upper="1" effort="1000" velocity="0.5"/>
+  </joint>
+
+<!-- Caja X-Y -->
+   <link name="base_caja5">
+    <visual>
+      <geometry>
+        <box size="0.2 0.03 0.5"/>
+      </geometry>
+      <material name="mat1"/>
+    </visual>
+  </link>
+
+  <!-- Joint for caja movement -->
+  <joint name="joint_caja5" type="prismatic">
+    <origin xyz="0 0 0.75" rpy="0 0 0"/>
+    <parent link="link_z"/>
+    <child link="base_caja5"/>
+    <axis xyz="0 0 0"/>
+    <limit lower="0" upper="1" effort="1000" velocity="0.5"/>
+  </joint>
+
+</robot>
