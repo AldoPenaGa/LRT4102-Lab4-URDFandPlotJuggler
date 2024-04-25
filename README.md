@@ -13,6 +13,7 @@
 - [Introduction](#introduction)
 - [Problems](#problems)
 - [Codes](#codes)
+- [Results](#results)
 - [Conclusion](#conclusion)
 - [Contributors](#codes)
 
@@ -44,8 +45,11 @@ There were multiple tasks to be addressed, for the URDF:
 Meanwhile for the PlotJuggler:
 
 1- Plot and analyze the operation of the last laboratory.
+
 2- Demonstrate that the final error is 0 or very close to 0. 
+
 3- Plot the evolution of ATG and DTG. 
+
 4- Run your program in a loop, at least 4 times, create a ROSBAG and then plot the entire experiment in Plot Juggler.
 
 
@@ -53,25 +57,34 @@ Meanwhile for the PlotJuggler:
 
 The codes and files related to this practice can be found in two separate folders regarding its domain.
 
-****-
+**URDF_Cartesian**
 
-The code dtg_atg asks for a desired position within the turtlesim workspace, the values are saved in a vector which will serve to calculate the distance to go (dtg). This is calculated by using the Pythagorean theorem (d = sqrt((x2-x1)² + (y2-y1)²)) between the actual pose, obtained by reading the topic `/turtle1/pose` and the desired location introduced by the user. The angle to go (atg) is calculated using atan2(y2-y1, x2-1) doing the operation in radians and displaying the result in degrees. Both values are printed once the program has finished its execution.
+This XML file defines the framework of the Cartesian robot for simulation, including physical linkages, linear motion joints, movement restrictions, and visual features. It includes the materials for the parts' appearance, links indicating physical components such as the base and movement axes, joints that allow movement between links, and visual geometry for each component.
 
-**spawn**
+**dtg_atg_withcontrollerPublishing**
 
-The spawn script has a similar input than the dtg_atg, in which the values are asked and saved in a vector. Then the `rospy.ServiceProxy` called `/kill` is called in order to erase the current turtle. Once this has done, the service `spawn` is also called so it spawns the turtle in the desired x, y and theta.
+This Python code works similarly to the one developed in the last practice https://github.com/AldoPenaGa/LRT4102-Lab3-ROSEuclidean/blob/main/lab03/src/dtg_atg_withcontroller.py . The key difference is that it publishes the linear and angular errors and the distance and angle to go in the topics `/error_linear`, `/error_angular`, `/distance_to_go` and `/angle_to_go` using Float32 data type:
 
-*Important to import the services `Spawn` and `Kill` from `turtle.srv` or the program won't work as intended.
+```Python
+    error_linear_publisher = rospy.Publisher('/error_linear', Float32, queue_size=10)
+    error_angular_publisher = rospy.Publisher('/error_angular', Float32, queue_size=10)
 
-**velocities**
+    distance_to_go_publisher = rospy.Publisher('/distance_to_go', Float32, queue_size=10)
+    angle_to_go_publisher = rospy.Publisher('/angle_to_go', Float32, queue_size=10)
+```
+This will help in the plotting for PlotJuggler analysis.
 
-The velocities program will print continuously the linear and angular velocities based on the error and the controller adjustments. These velocities are obtained with the product of those characteristics.
+### Results
 
-This script just demonstrates the relation between these structures and how they affect the movement of the turtlesim, in future releases, the movement in y axis and a plotting graphic tool will be added.
+The first image (figure 1) shows the built URDF model displayed in the following page https://mymodelrobot.appspot.com/5629499534213120 , the joints `joint_x`, `joint_y`, `joint_z` permits the moving of the model. 
 
-**dtg_atg_withcontroller**
+![Figure 1. URDF model loaded in mymodelrobot](https://github.com/AldoPenaGa/LRT4102-Lab4-URDFandPlotJuggler/.jpg)
 
-This script aims not only to calculate the distance to go and the angle to go but to move the robot to the desired pose introduced by the user, first does the same than the dtg_atg script and then, by using a P controller (iterating the proportional control constant for angular velocity to the error produced by the actual pose and the desired pose), rotates to achieve the position asked (this is done by setting the linear velocity to zero meanwhile it reaches a threshold for the rotation) and then moves forward to that point (comparing the actual pose to the desired pose and utilizing the proportional control constant for linear velocity). `Kp_linear` and `Kp_angular` can be adjusted to meet the expactations depending on the purpose, nevertheless, the default values are: 0.5 and 1.1 respectively. Finally, the current pose, the desired pose and the error are displayed continuously. Once it has achieved the desired position, it asks again for a new pose to reach.
+
+Meanwhile, the next series of pictures (figures illustrate the results for the PlotJuggler and ROSbag section.
+
+
+
 
 ### Conclusion
 In this study, we tested the Euclidean strategy for handling the Turtlesim in the Robot Operating System (ROS). We accomplished precise movement by calculating distances and angles while employing a P controller. Throughout this educational journey, we connected theory and practice, gaining significant insights into robotic system design. Plus, new structures like services were explored, setting another tool for basic programs in ROS.
